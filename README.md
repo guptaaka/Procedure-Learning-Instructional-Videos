@@ -126,6 +126,23 @@ task.
 
 ### Annotations
 
+Task | Levenshtein | Damerau Levenshtein | Jaro
+---- | ----------- | ------------------- | ----
+Assemble Clarinet | 0.571 | 0.577 | 0.944
+Change Iphone Battery | 0.545 | 0.554 | 0.919
+Change Tire | 0.440 | 0.440 | 0.919
+Change Toilet Seat | 0.504 | 0.512 | 0.918
+Jump Car | 0.550 | 0.560 | 0.917
+Make Coffee | 0.936 | 0.937 | 0.988
+Make Pbj Sandwich | 0.653 | 0.653 | 0.926
+Make Salmon Sandwich | 0.720 | 0.720 | 0.918
+Perform CPR | 0.930 | 0.931 | 0.984
+Repot Plant | 0.727 | 0.727 | 0.924
+Setup Chromecast | 0.799 | 0.799 | 0.924
+
+Table 1: Similarity between key steps obtained from video and audio
+narration
+
 Given the key steps for a task and also for each video for the task,
 we annotated each sentence from the narration with relevant key
 steps, if present in the sentence. Some complex sentences covered
@@ -154,23 +171,6 @@ text. This provided us a cleaner dataset to work with the confident
 key steps and establish a model that works with good accuracy, with
 a possibility of improvement by extending the training with both
 types of labels.
-
-Table 1: Similarity between key steps obtained from video and audio
-narration
-
-Task | Levenshtein | Damerau Levenshtein | Jaro
----- | ----------- | ------------------- | ----
-Assemble Clarinet | 0.571 | 0.577 | 0.944
-Change Iphone Battery | 0.545 | 0.554 | 0.919
-Change Tire | 0.440 | 0.440 | 0.919
-Change Toilet Seat | 0.504 | 0.512 | 0.918
-Jump Car | 0.550 | 0.560 | 0.917
-Make Coffee | 0.936 | 0.937 | 0.988
-Make Pbj Sandwich | 0.653 | 0.653 | 0.926
-Make Salmon Sandwich | 0.720 | 0.720 | 0.918
-Perform CPR | 0.930 | 0.931 | 0.984
-Repot Plant | 0.727 | 0.727 | 0.924
-Setup Chromecast | 0.799 | 0.799 | 0.924
 
 ## Finding key steps for each sentence
 
@@ -231,18 +231,6 @@ Bert produces 768-dimensional vector for a sentence.
 
 ### Word embeddings and Cosine Similarity
 
-Cosine similarity is a measure of similarity between two non-zero
-vectors of an inner product space. This metric can be used to measure
-how similar two sentences are irrespective of their sizes. To use this
-approach, we compute vector embeddings for all key steps in a video
-using each of the four models, Word2Vec, GloVe, ELMo and Bert.
-Using one model at a time, we compute cosine similarity between
-the n-dimensional vector of a sentence and the n-dimensional vector
-of each key step. This way, we calculate the cosine similarity for
-each sentence of every video in a task.
-
-Table 2: F1 scores from the cosine similarity model
-
 Task | Word2Vec | Bert | ELMo | GloVe
 ---- | -------- | ---- | ---- | -----
 Assemble Clarinet | 0.18 | 0.048 | 0.2 | 0.068
@@ -256,6 +244,18 @@ Make Salmon Sandwich | 0.08 | 0.051 | 0.15 | 0.076
 Perform CPR | 0.5 | 0.108 | 0.2 | 0.113
 Repot Plant | 0.02 | 0.050 | 0.1 | 0.094
 Setup Chromecast | 0.09 | 0.034 | 0.1 | 0.044
+
+Table 2: F1 scores from the cosine similarity model
+
+Cosine similarity is a measure of similarity between two non-zero
+vectors of an inner product space. This metric can be used to measure
+how similar two sentences are irrespective of their sizes. To use this
+approach, we compute vector embeddings for all key steps in a video
+using each of the four models, Word2Vec, GloVe, ELMo and Bert.
+Using one model at a time, we compute cosine similarity between
+the n-dimensional vector of a sentence and the n-dimensional vector
+of each key step. This way, we calculate the cosine similarity for
+each sentence of every video in a task.
 
 ### Word embeddings and Neural Network
 
@@ -284,22 +284,6 @@ function and Adam optimizer. Using a 70% training to test ratio,
 we train the model and evaluate its results. Even as the amount of
 training data is low, we find good results from our Neural network
 model.
-Table 3 and Table 4 show the best results we obtain from our
-Neural Network model for each video. We run this model on the
-sentence vectors obtained from Word2Vec and ELMo models. The
-tasks ‘Make Coffee’ and ‘Perform CPR’ again outperform the rest
-of the tasks for the same reason i.e. because we have 60 videos
-data for each of the two tasks as compared to 10 videos data for the
-other tasks. We also observe from Table 2, Table 3 and Table 4 that
-for each task, the F1 score obtained with Neural Network layers is
-much better as compared to the F1 score obtained with the previous
-approach of localizing the key steps based on cosine similarity and a
-threshold value. We get good results by using ELMo embeddings for
-most of the tasks, except for ‘Perform CPR’, ‘Make Pbj Sandwich’
-and ‘Setup Chromecast’ tasks, where Word2Vec embeddings yield
-better results.
-
-Table 3: F1 scores from Neural Network model with Word2Vec embeddings
 
 Task | F1 score | Precision | Recall
 ---- | -------- | --------- | ------
@@ -315,7 +299,8 @@ Perform CPR | 0.834 | 0.880 | 0.792
 Repot Plant | 0.074 | 0.500 | 0.040
 Setup Chromecast | 0.437 | 0.514 | 0.380
 
-Table 4: F1 scores from Neural Network model with ELMo embeddings
+Table 3: F1 scores from Neural Network model with Word2Vec embeddings
+
 Task | F1 score | Precision | Recall
 ---- | -------- | --------- | ------
 Assemble Clarinet | 0.318 | 0.538 | 0.226
@@ -329,6 +314,23 @@ Make Salmon Sandwich | 0.222 | 0.294 | 0.179
 Perform CPR | 0.772 | 0.826 | 0.725
 Repot Plant | 0.118 | 0.222 | 0.080
 Setup Chromecast | 0.4 | 0.533 | 0.320
+
+Table 4: F1 scores from Neural Network model with ELMo embeddings
+
+Table 3 and Table 4 show the best results we obtain from our
+Neural Network model for each video. We run this model on the
+sentence vectors obtained from Word2Vec and ELMo models. The
+tasks ‘Make Coffee’ and ‘Perform CPR’ again outperform the rest
+of the tasks for the same reason i.e. because we have 60 videos
+data for each of the two tasks as compared to 10 videos data for the
+other tasks. We also observe from Table 2, Table 3 and Table 4 that
+for each task, the F1 score obtained with Neural Network layers is
+much better as compared to the F1 score obtained with the previous
+approach of localizing the key steps based on cosine similarity and a
+threshold value. We get good results by using ELMo embeddings for
+most of the tasks, except for ‘Perform CPR’, ‘Make Pbj Sandwich’
+and ‘Setup Chromecast’ tasks, where Word2Vec embeddings yield
+better results.
 
 ## CONCLUSION
 
