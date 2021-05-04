@@ -157,18 +157,20 @@ types of labels.
 
 Table 1: Similarity between key steps obtained from video and audio
 narration
-Task Levenshtein Damerau Levenshtein Jaro
-Assemble Clarinet 0.571 0.577 0.944
-Change Iphone Battery 0.545 0.554 0.919
-Change Tire 0.440 0.440 0.919
-Change Toilet Seat 0.504 0.512 0.918
-Jump Car 0.550 0.560 0.917
-Make Coffee 0.936 0.937 0.988
-Make Pbj Sandwich 0.653 0.653 0.926
-Make Salmon Sandwich 0.720 0.720 0.918
-Perform CPR 0.930 0.931 0.984
-Repot Plant 0.727 0.727 0.924
-Setup Chromecast 0.799 0.799 0.924
+
+Task | Levenshtein | Damerau Levenshtein | Jaro
+---- | ----------- | ------------------- | ----
+Assemble Clarinet | 0.571 | 0.577 | 0.944
+Change Iphone Battery | 0.545 | 0.554 | 0.919
+Change Tire | 0.440 | 0.440 | 0.919
+Change Toilet Seat | 0.504 | 0.512 | 0.918
+Jump Car | 0.550 | 0.560 | 0.917
+Make Coffee | 0.936 | 0.937 | 0.988
+Make Pbj Sandwich | 0.653 | 0.653 | 0.926
+Make Salmon Sandwich | 0.720 | 0.720 | 0.918
+Perform CPR | 0.930 | 0.931 | 0.984
+Repot Plant | 0.727 | 0.727 | 0.924
+Setup Chromecast | 0.799 | 0.799 | 0.924
 
 ## Finding key steps for each sentence
 
@@ -240,18 +242,20 @@ of each key step. This way, we calculate the cosine similarity for
 each sentence of every video in a task.
 
 Table 2: F1 scores from the cosine similarity model
-Task Word2Vec Bert ELMo GloVe
-Assemble Clarinet 0.18 0.048 0.2 0.068
-Change Iphone Battery 0.09 0.048 0.12 0.058
-Change Tire 0.05 0.043 0.1 0.035
-Change Toilet Seat 0.07 0.029 0.2 0.069
-Jump Car 0.07 0.044 0.17 0.114
-Make Coffee 0.18 0.051 0.22 0.057
-Make Pbj Sandwich 0.06 0.063 0.2 0.077
-Make Salmon Sandwich 0.08 0.051 0.15 0.076
-Perform CPR 0.5 0.108 0.2 0.113
-Repot Plant 0.02 0.050 0.1 0.094
-Setup Chromecast 0.09 0.034 0.1 0.044
+
+Task | Word2Vec | Bert | ELMo | GloVe
+---- | -------- | ---- | ---- | -----
+Assemble Clarinet | 0.18 | 0.048 | 0.2 | 0.068
+Change Iphone Battery | 0.09 | 0.048 | 0.12 | 0.058
+Change Tire | 0.05 | 0.043 | 0.1 | 0.035
+Change Toilet Seat | 0.07 | 0.029 | 0.2 | 0.069
+Jump Car | 0.07 | 0.044 | 0.17 | 0.114
+Make Coffee | 0.18 | 0.051 | 0.22 | 0.057
+Make Pbj Sandwich | 0.06 | 0.063 | 0.2 | 0.077
+Make Salmon Sandwich | 0.08 | 0.051 | 0.15 | 0.076
+Perform CPR | 0.5 | 0.108 | 0.2 | 0.113
+Repot Plant | 0.02 | 0.050 | 0.1 | 0.094
+Setup Chromecast | 0.09 | 0.034 | 0.1 | 0.044
 
 ### Word embeddings and Neural Network
 
@@ -296,32 +300,35 @@ and ‘Setup Chromecast’ tasks, where Word2Vec embeddings yield
 better results.
 
 Table 3: F1 scores from Neural Network model with Word2Vec embeddings
-Task F1 score Precision Recall
-Assemble Clarinet 0.303 0.405 0.242
-Change Iphone Battery 0.265 0.361 0.210
-Change Tire 0.333 0.417 0.278
-Change Toilet Seat 0.314 0.455 0.240
-Jump Car 0.276 0.500 0.190
-Make Coffee 0.504 0.528 0.483
-Make Pbj Sandwich 0.216 0.333 0.160
-Make Salmon Sandwich 0.150 0.250 0.107
-Perform CPR 0.834 0.880 0.792
-Repot Plant 0.074 0.500 0.040
-Setup Chromecast 0.437 0.514 0.380
+
+Task | F1 score | Precision | Recall
+---- | -------- | --------- | ------
+Assemble Clarinet | 0.303 | 0.405 | 0.242
+Change Iphone Battery | 0.265 | 0.361 | 0.210
+Change Tire | 0.333 | 0.417 | 0.278
+Change Toilet Seat | 0.314 | 0.455 | 0.240
+Jump Car | 0.276 | 0.500 | 0.190
+Make Coffee | 0.504 | 0.528 | 0.483
+Make Pbj Sandwich | 0.216 | 0.333 | 0.160
+Make Salmon Sandwich | 0.150 | 0.250 | 0.107
+Perform CPR | 0.834 | 0.880 | 0.792
+Repot Plant | 0.074 | 0.500 | 0.040
+Setup Chromecast | 0.437 | 0.514 | 0.380
 
 Table 4: F1 scores from Neural Network model with ELMo embeddings
-Task F1 score Precision Recall
-Assemble Clarinet 0.318 0.538 0.226
-Change Iphone Battery 0.326 0.5 0.242
-Change Tire 0.433 0.542 0.361
-Change Toilet Seat 0.367 0.628 0.260
-Jump Car 0.357 0.625 0.250
-Make Coffee 0.538 0.606 0.483
-Make Pbj Sandwich 0.158 0.231 0.120
-Make Salmon Sandwich 0.222 0.294 0.179
-Perform CPR 0.772 0.826 0.725
-Repot Plant 0.118 0.222 0.080
-Setup Chromecast 0.4 0.533 0.320
+Task | F1 score | Precision | Recall
+---- | -------- | --------- | ------
+Assemble Clarinet | 0.318 | 0.538 | 0.226
+Change Iphone Battery | 0.326 | 0.5 | 0.242
+Change Tire | 0.433 | 0.542 | 0.361
+Change Toilet Seat | 0.367 | 0.628 | 0.260
+Jump Car | 0.357 | 0.625 | 0.250
+Make Coffee | 0.538 | 0.606 | 0.483
+Make Pbj Sandwich | 0.158 | 0.231 | 0.120
+Make Salmon Sandwich | 0.222 | 0.294 | 0.179
+Perform CPR | 0.772 | 0.826 | 0.725
+Repot Plant | 0.118 | 0.222 | 0.080
+Setup Chromecast | 0.4 | 0.533 | 0.320
 
 ## CONCLUSION
 
