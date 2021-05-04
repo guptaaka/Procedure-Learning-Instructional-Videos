@@ -1,6 +1,6 @@
-Machine Learning for Procedure Learning from Instructions
+# Machine Learning for Procedure Learning from Instructions
 
-ABSTRACT
+## ABSTRACT
 
 We explore and compare the different Natural Language Processing
 models to generate word embeddings and develop weakly supervised
@@ -22,7 +22,7 @@ steps in video based on the audio narration data and how it overruns
 the performance of the simple word representations of the narration
 text.
 
-INTRODUCTION
+## INTRODUCTION
 
 Understanding the key steps from an instructional video to carry
 out a task is a complex problem. Training a network to localize
@@ -93,7 +93,7 @@ meaning that the same word in different contexts can have different
 representations. For example, ELMo and Bert can be used to
 generate contextual word embeddings to build a good search engine.
 
-EXPERIMENTS AND RESULTS
+## EXPERIMENTS AND RESULTS
 
 Analyzing the audio narration of the instruction videos involves
 using Natural Language Processing and Neural Networks. We first
@@ -106,7 +106,7 @@ the results improve significantly with the latter enhancement, i.e., by
 using neural network on the word embeddings produced by the NLP
 models extract deeper information and yields a better performance.
 
-Dataset
+### Dataset
 
 Building a model on the video narration that spans across multiple
 instructional tasks requires a good deal of instructional video dataset
@@ -124,7 +124,7 @@ contain all the key steps and the order of key steps in some videos
 might be different, as there are multiple ways to perform the same
 task.
 
-Annotations
+### Annotations
 
 Given the key steps for a task and also for each video for the task,
 we annotated each sentence from the narration with relevant key
@@ -170,8 +170,19 @@ Perform CPR 0.930 0.931 0.984
 Repot Plant 0.727 0.727 0.924
 Setup Chromecast 0.799 0.799 0.924
 
+## Finding key steps for each sentence
 
-Word embeddings
+Now that we have manually generated the key steps for the textual
+narration data and compared that these key steps are mostly in line
+with the ones we get from the visual data, we start to build a model
+that identifies the key steps covered in a sentence given the sentence
+as an input. We want to make sure that a key step is correctly mapped
+to a sentence that conveys an action towards carrying out the key
+step. This would provide a higher probability that the key step is
+being carried out in the video as well because our ultimate goal is to
+localize the key steps in an instructional video.
+
+### Word embeddings
 
 Since a computer works best with numbers, we transform the words
 into relevant word embeddings. A word embedding is a mapping of a
@@ -216,7 +227,7 @@ So, MaxPooling layer is not needed for the two contextual models.
 ELMo produces a 1024-dimensional vector for a sentence, while
 Bert produces 768-dimensional vector for a sentence.
 
-Word embeddings and Cosine Similarity
+### Word embeddings and Cosine Similarity
 
 Cosine similarity is a measure of similarity between two non-zero
 vectors of an inner product space. This metric can be used to measure
@@ -242,7 +253,7 @@ Perform CPR 0.5 0.108 0.2 0.113
 Repot Plant 0.02 0.050 0.1 0.094
 Setup Chromecast 0.09 0.034 0.1 0.044
 
-Word embeddings and Neural Network
+### Word embeddings and Neural Network
 
 For this milestone, we use Neural Network to extract denser information
 from the sentence vectors to find the key steps covered in
@@ -312,7 +323,7 @@ Perform CPR 0.772 0.826 0.725
 Repot Plant 0.118 0.222 0.080
 Setup Chromecast 0.4 0.533 0.320
 
-CONCLUSION
+## CONCLUSION
 
 We develop a neural network on the sentence vector embeddings
 and show how the neural network model performs a better task in
